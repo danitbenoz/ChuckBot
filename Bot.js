@@ -12,6 +12,11 @@ async function setupBot(bot) {
 
     // Get an array of language objects with 'code' and 'name' properties
     const availableLanguages = iso6391.getAllCodes().map(code => ({ code, name: iso6391.getName(code) }));
+    bot.start((ctx) => ctx.reply(
+        "This is Chuck Norris Jokes Bot! \n"+
+        "Step 1 : Select a language using /setlanguage. \n" + 
+        "Step 2 : Enter a number between 1 and 101 to get a joke.\n" 
+        ));
 
     // Command handler for setting user's preferred language
     bot.command('setlanguage', (ctx) => {

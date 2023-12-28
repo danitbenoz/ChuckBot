@@ -7,21 +7,35 @@ async function scrapeJokes() {
     let jokes = [];
 
     try {
-        // Make a GET request to the specified URL with headers
         const response = await axios.get('https://parade.com/968666/parade/chuck-norris-jokes/', {
             headers: {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36',
                 'Accept-Language': 'en-US,en;q=0.9',
+                'Accept-Encoding': 'gzip, compress, deflate, br',
+                'Referer': 'http://parade.com',  // Add a referer header
+                // Add any other headers that might be necessary
             },
         });
 
-        // Extract jokes from the response HTML using the extractJokes function
+    
         jokes = extractJokes(response.data);
         console.log('Jokes scraped successfully!');
     } catch (error) {
-        // Handle errors that occur during the scraping process
-        console.error('Error scraping jokes:', error.message);
+        console.error('Error scraping jokes:', error);
+    
+        // Log additional details for debugging
+        if (error.response) {
+            console.error('Response status:', error.response.status);
+            console.error('Response headers:', error.response.headers);
+            console.error('Response data:', error.response.data);
+        } else if (error.request) {
+            console.error('No response received. Request details:', error.request);
+        } else {
+            console.error('Other error details:', error.message);
+        }
     }
+    
+    
 
     return jokes;
 }
