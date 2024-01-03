@@ -13,7 +13,6 @@ async function scrapeJokes() {
                 'Accept-Language': 'en-US,en;q=0.9',
                 'Accept-Encoding': 'gzip, compress, deflate, br',
                 'Referer': 'http://parade.com',  // Add a referer header
-                // Add any other headers that might be necessary
             },
         });
 
